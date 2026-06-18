@@ -1,6 +1,7 @@
 package com.adminservice.serviceImpl;
 
 import com.adminservice.client.User;
+import com.adminservice.dto.AdminUserDto;
 import com.adminservice.feingClient.UserClient;
 import com.adminservice.model.Admin;
 import com.adminservice.repository.AdminRepository;
@@ -81,8 +82,24 @@ public class AdminServiceImpl implements AdminService {
         return this.userClient.createUser(user);
     }
 
+
     @Override
-    public List<User> getUsersUnderAdminid(Long adminId) {
-        return this.userClient.getUsersByAdminId(adminId);
+    public AdminUserDto getUsersUnderAdminid(Long adminId) {
+
+        Admin admin = adminRepository.findById(adminId)
+                .orElse(null);
+
+        List<User> users =
+                userClient.getUsersByAdminId(adminId);
+
+        AdminUserDto dto = new AdminUserDto();
+
+        dto.setAdminId(admin.getAdminId());
+        dto.setName(admin.getName());
+        dto.setEmail(admin.getEmail());
+        dto.setRole(admin.getRole());
+        dto.setUsers(users);
+
+        return dto;
     }
 }

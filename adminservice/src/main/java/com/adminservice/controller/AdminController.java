@@ -1,6 +1,7 @@
 package com.adminservice.controller;
 
 import com.adminservice.client.User;
+import com.adminservice.dto.AdminUserDto;
 import com.adminservice.model.Admin;
 import com.adminservice.service.AdminService;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
@@ -53,7 +54,7 @@ public class AdminController {
 
     }
     @GetMapping("/{adminId}/users")
-    public ResponseEntity<List<User>> getUserUnderAdmin(@PathVariable Long adminId){
+    public ResponseEntity<AdminUserDto> getUserUnderAdmin(@PathVariable Long adminId){
         return new ResponseEntity<>(this.adminService.getUsersUnderAdminid(adminId),HttpStatus.OK);
     }
 

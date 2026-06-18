@@ -2,6 +2,7 @@ package com.adminservice.service;
 
 import com.adminservice.client.User;
 import com.adminservice.model.Admin;
+import com.adminservice.dto.AdminUserDto;
 
 import java.util.List;
 
@@ -21,5 +22,7 @@ public interface AdminService {
 
     User onBoardUserUser(Long id,User user);
 
-    List<User> getUsersUnderAdminid(Long adminId);
+
+
+    AdminUserDto getUsersUnderAdminid(Long adminId);
 }
